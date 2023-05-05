@@ -7,6 +7,14 @@ import { porductList } from '../productsdata/ProductsData'
 function Products() {
     const [products, setProducts] = useState(porductList);
     const [edit, setEdit] = useState({});
+    const [modal, setModal] = useState(false)
+
+    const openModal = () => {
+        setModal(true)
+    }
+    const closeModal = () => {
+        setModal(false)
+    }
 
     const addProduct = (newProduct) => {
         setProducts([...products, newProduct])
@@ -33,11 +41,13 @@ function Products() {
                 <div>
                     <AddProducts addProduct={addProduct} />
                 </div>
-                <div>
-                    <EditProducts editedData={edit} saveHandler={saveHandler} allDatas={products} />
-                </div>
+                {modal &&
+                    <div>
+                        <EditProducts closeModal={closeModal} setEdit={setEdit} editedData={edit} saveHandler={saveHandler} allDatas={products} />
+                    </div>
+                }
             </div>
-            <ProductsTable products={products} editHandler={editHandler} handleDelete={handleDelete} />
+            <ProductsTable openModal={openModal} products={products} editHandler={editHandler} handleDelete={handleDelete} />
         </>
     )
 }

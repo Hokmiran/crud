@@ -1,7 +1,7 @@
 import React from 'react'
 
 function ProductsTable(props) {
-    const { products, handleDelete } = props;
+    const { products, handleDelete, openModal } = props;
 
     return (
         <>
@@ -28,7 +28,11 @@ function ProductsTable(props) {
                             <td>{product.color}</td>
                             <td>{product.count}</td>
                             <td>
-                                <button className='buttonEdit' onClick={() => props.editHandler(product.id)}>
+                                <button className='buttonEdit' onClick={() => {
+                                    props.editHandler(product.id);
+                                    openModal();
+                                }}
+                                >
                                     Edit
                                 </button>
                             </td>
